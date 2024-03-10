@@ -2,20 +2,45 @@ import java.util.HashMap;
 
 public class Table {
     private static HashMap<Integer, Player> players;
-    private static Player user;
     private static Player bigBlind;
     private static Player smallBlind;
     private static String[] tableArray;
+    private static Card[] river = new Card[5];
 
     // Constructor for the table
     // Creates n players and sets the user to be the first player
     public Table(int num) {
         players = new HashMap<>();
-        user = new Player(null, null, 0);
         players.put(0, new Player(null, null, 0));
         for (int i = 1; i < num; i++) {
             players.put(i, new Player(null, null, i));
         }
+    }
+
+    public void setFlop(Card card1, Card card2, Card card3) {
+        river[0] = card1;
+        river[1] = card2;
+        river[2] = card3;
+    }
+
+    public void setTurn(Card card) {
+        river[3] = card;
+    }
+
+    public void setRiver(Card card) {
+        river[4] = card;
+    }
+
+    public Card[] getFlop() {
+        return new Card[] {river[0], river[1], river[2]};
+    }
+
+    public Card getTurn() {
+        return river[3];
+    }
+
+    public Card getRiver() {
+        return river[4];
     }
 
     public void setFirstBigBlind() {
@@ -41,7 +66,7 @@ public class Table {
         return tableArray;
     }
 
-    public Player getPlayers(int index) {
+    public Player getPlayer(int index) {
         return players.get(index);
     }
 
@@ -50,7 +75,7 @@ public class Table {
     }
 
     public Player getUser() {
-        return user;
+        return players.get(0);
     }
 
     public Player getBigBlind() {
@@ -82,5 +107,15 @@ public class Table {
         }
         tableArray = result.toString().split("\n");
         return result.toString();
+    }
+
+    public void setCardsAfterRiver() {
+        players.forEach((index, player) -> {
+            player.addCard(river[0]);
+            player.addCard(river[1]);
+            player.addCard(river[2]);
+            player.addCard(river[3]);
+            player.addCard(river[4]);
+        });
     }
 }

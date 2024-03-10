@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+
 // Simulates a player in the poker game
 public class Player {
-    private static Card card1;
-    private static Card card2;
+    private Card card1;
+    private Card card2;
+    private ArrayList<Card> hand = new ArrayList<>();
     private boolean bigBlind = false;
     private boolean smallBlind = false;
     private boolean isFolded;
@@ -9,8 +12,8 @@ public class Player {
     private int name; // 0 is player
 
     public Player(Card card1, Card card2, int name) {
-        Player.card1 = card1;
-        Player.card2 = card2;
+        this.card1 = card1;
+        this.card2 = card2;
         this.name = name;
     }
 
@@ -21,11 +24,11 @@ public class Player {
     }
 
     public Card getCard1() {
-        return card1;
+        return this.card1;
     }
 
     public Card getCard2() {
-        return card2;
+        return this.card2;
     }
 
     public void toggleBigBlind() {
@@ -61,14 +64,24 @@ public class Player {
     }
 
     public String toString() {
-        return card1.toString() + " " + card2.toString();
+        return this.card1.toString() + " " + card2.toString();
     }
 
     public void setCard1(Card card) {
-        card1 = card;
+        this.card1 = card;
+        this.hand.add(card);
     }
 
     public void setCard2(Card card) {
-        card2 = card;
+        this.card2 = card;
+        this.hand.add(card);
+    }
+
+    public void addCard(Card card) {
+        this.hand.add(card);
+    }
+
+    public ArrayList<Card> getHand() {
+        return this.hand;
     }
 }

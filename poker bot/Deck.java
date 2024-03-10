@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Deck {
     private Card[] cards = new Card[52];
+    int numCardsDealt = 0;
 
     public Deck() {
         // Initialize the cards
@@ -133,5 +134,24 @@ public class Deck {
             table.setPlayerCard2(cards[count + table.getNumPlayers()], i);
             count++;
         }
+        numCardsDealt = 2 * table.getNumPlayers();
+    }
+
+    public void flop(Table table) {
+        // Deal the flop
+        table.setFlop(cards[numCardsDealt], cards[numCardsDealt + 1], cards[numCardsDealt + 2]);
+        numCardsDealt += 3;
+    }
+
+    public void turn(Table table) {
+        // Deal the turn
+        table.setTurn(cards[numCardsDealt]);
+        numCardsDealt++;
+    }
+
+    public void river(Table table) {
+        // Deal the river
+        table.setRiver(cards[numCardsDealt]);
+        numCardsDealt++;
     }
 }

@@ -38,5 +38,33 @@ public class Main {
         cards.deal(table);
         System.out.println("Cards dealt.");
         System.out.println("Your cards are: " + table.getUser().getCard1() + " and " + table.getUser().getCard2() + ".");
+
+        // Set up the flop, turn, and river
+        System.out.println("Setting up the flop");
+        cards.flop(table);
+        System.out.println("Flop set up: " + table.getFlop()[0] + ", " + table.getFlop()[1] + ", " + table.getFlop()[2] + ".");
+
+        // // Take user input
+        // System.out.println("What would you like to do? Raise, Call, or Fold? ");
+        // String userAction = sc.next();
+        // System.out.println("You chose to " + userAction + ".");
+        
+        // Set up the turn
+        System.out.println("Setting up the turn");
+        cards.turn(table);
+        System.out.println("Turn set up: " + table.getTurn().toString() + ".");
+
+        // Set up the river
+        System.out.println("Setting up the river");
+        cards.river(table);
+        System.out.println("River set up: " + table.getRiver() + ".");
+
+        // Set cards of player
+        table.setCardsAfterRiver();
+
+        WinLogic w = new WinLogic();
+
+        // Determine user hand
+        System.out.println("Your hand is: " + w.determineHand(table.getUser().getHand()));
     }
 }
